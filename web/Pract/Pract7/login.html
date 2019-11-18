@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script type="text/javascript">
+    		
+            function checkForm(){
+                var allOk=true;				
+                var objNameTxtBox;
+                var objPasswordTxtBox;
+                var strName;
+                var strPassword;
+                var strMessage="";
+                var divBox;
+                //alert("0");
+                objNameTxtBox = document.getElementById("loginid");
+                objPasswordTxtBox = document.getElementById("password");
+
+                divBox = document.getElementById("msg");
+
+                var idErr = document.getElementById("idErr");
+
+                idErr.innerHTML = "";
+                strName = objNameTxtBox.value;
+                strPassword = objPasswordTxtBox.value;
+                //alert("1");
+                if (strName == "") {
+                    alert("i m here");
+                    allOk = false;
+                    strMessage += "Please enter your Login ID!<br/>";
+                    idErr.innerHTML = "*Enter ID";
+                }
+
+                if (strPassword == "") {
+                    allOk = false;
+                    strMessage += "Please enter your password!<br/>";
+                }
+
+                //if(blnIsAllOk==false){
+                //alert(strMessage);
+                divBox.innerHTML = strMessage;
+                //}
+                return allOk;
+            }
+
+        </script>        
+        
+    </head>
+    <body>
+        <div id="msg"></div>
+        <form action="../../AuthenticateServlet" method="GET">
+
+            <table>
+                <tr>
+                    <td>
+                        Login ID:
+                    </td>
+                    <td>
+                        <input type="text" id="loginid" name="loginid" />
+                    </td>
+                    <td>  <div id="idErr"></div></td>
+                </tr>
+                <tr>
+                    <td>
+                        Password:
+                    </td>
+                    <td>
+                        <input type="password" id="password" name="password"/>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="submit" value="Login" name="btnSubmit" onclick="return checkForm()"/>
+                    </td>
+                    <td>
+                        <input type="reset" value="Reset" name="btnReset" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>
