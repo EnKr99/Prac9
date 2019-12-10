@@ -43,17 +43,7 @@ public class SearchInventoryServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-//            out.println("<!DOCTYPE html>");
-//            out.println("<html>");
-//            out.println("<head>");
-//            out.println("<title>Servlet SearchInventoryServlet</title>");            
-//            out.println("</head>");
-//            out.println("<body>");
-//            out.println("<h1>Servlet SearchInventoryServlet at " + request.getContextPath() + "</h1>");
-//            out.println("</body>");
-//            out.println("</html>");
-//----------------------------------------------------
+            
             HttpSession session = request.getSession();
             String searchTxt = request.getParameter("frmSearch");
             if (searchTxt != null) {
@@ -63,18 +53,24 @@ public class SearchInventoryServlet extends HttpServlet {
 
                 Client client = ClientBuilder.newClient();
                 WebTarget target = client
-                        .target("http://localhost:8080/SEP1718/webresources/pract9WS")  //**modify to point to your own web service
-                        .path("SearchInventory")
+                        .target("http://localhost:8080/sep-pract9-1920s2/webresources/pract9WS/SearchInventory")  //**modify to point to your own web service
+                        //.path("SearchInventory")
                         .queryParam("searchTxt", searchTxt);
                 Invocation.Builder invocationBuilder = target.request(MediaType.APPLICATION_JSON);
                 Response res = invocationBuilder.get();
-                out.print("status: " + res.getStatus());
-
-                ArrayList<Inventory> al = res.readEntity(new GenericType<ArrayList<Inventory>>() {
-                });
-                out.print("======size of arraylist===>"+al.size());
-                session.setAttribute("myInvListObj", al);   //write to session object
-                response.sendRedirect("pract9/searchForm.jsp");
+                
+                // 10: Check Response Object Status of OK
+                if (res.getStatus() == Response.Status.OK.getStatusCode()) {
+                    out.print("status: " + res.getStatus());
+                    // 10a: Read entity
+                    ArrayList<Inventory> al = res.readEntity(new GenericType<ArrayList<Inventory>>() {
+                    });
+                    out.print("======size of arraylist===>"+al.size());
+                    // 11: Set Session Attribute
+                    session.setAttribute("myInvListObj", al);   //write to session object 
+                
+                    response.sendRedirect("pract9/searchForm.jsp?msg=found");
+                }
             }
 
 

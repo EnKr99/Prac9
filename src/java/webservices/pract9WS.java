@@ -59,7 +59,7 @@ public class pract9WS {
             Class.forName("com.mysql.jdbc.Driver");
             // Step 2: Define Connection URL
             //String connURL = "jdbc:mysql://localhost/onlineshop?user=root&password=root";//DBConn.DBConnectionSettings.connectionURL;
-            String connURL = "jdbc:mysql://localhost/db1?user=root&password=12345";
+            String connURL = "jdbc:mysql://localhost/onlineShop?user=root&password=12345";
             // Step 3: Establish connection to URL
             Connection conn = DriverManager.getConnection(connURL);
 
@@ -101,7 +101,7 @@ public class pract9WS {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             // Step 2: Define Connection URL
-            String connURL = "jdbc:mysql://localhost/db1?user=root&password=12345";//DBConn.DBConnectionSettings.connectionURL;
+            String connURL = "jdbc:mysql://localhost/onlineShop?user=root&password=12345";//DBConn.DBConnectionSettings.connectionURL;
             // Step 3: Establish connection to URL
             Connection conn = DriverManager.getConnection(connURL);
             //String sqlStr = "Select * from inventory where functions like '%" + searchString + "%' order by brand, model";

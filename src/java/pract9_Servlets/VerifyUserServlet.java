@@ -56,7 +56,7 @@ public class VerifyUserServlet extends HttpServlet {
         HttpSession session = request.getSession();
         Client client = ClientBuilder.newClient();
         WebTarget target = client
-                .target("http://localhost:8080/SEP1718/webresources/pract9WS/VerifyUser")
+                .target("http://localhost:8080/sep-pract9-1920s2/webresources/pract9WS/VerifyUser")
                 //.target("http://localhost:8080/MyWS/webresources/pract9WS_dit03")
                 //.path("verifyUser")
                 .queryParam("userid", userID)

@@ -20,8 +20,9 @@
         response.sendRedirect("login.jsp?status=fail");
     } 
 
-%>            
-        <h3><%=request.getRequestURI()%></h3>
+%> 
+
+    <h3><%=request.getRequestURI()%></h3>   
     <form action="../SearchInventoryServlet" name="form1" method="post">
          Search product: <input type="text" name="frmSearch" size="32"><br>
          <input type="submit" name="submit" value="Search">
@@ -32,8 +33,11 @@
     int idTxt;
     String brandTxt;
     String modelTxt;
+    String msg;
+    msg = request.getParameter("msg");
     ArrayList<Inventory> invList = (ArrayList<Inventory>) session.getAttribute("myInvListObj");
     if ((invList != null) && !invList.isEmpty()) {
+        if (msg.equals("found")) { 
             out.print("<table border='0' padding='10'><tr bgcolor='#d6d6c2'><td width='20%'>Brand</td><td width='50%'>Model</td><td colspan='2' width='*%'>Actions</td></tr>");
             for (Inventory inv : invList) {    // see Enhanced Loop in Java5 and above in https://www.tutorialspoint.com/java/java_loop_control.htm        
                 idTxt = inv.getId();
@@ -45,9 +49,10 @@
                 out.print("<a href='processDelete.jsp?frmID=" + idTxt + "'><input type='button' value='Delete' /></a>");
                 out.print("</td></tr>");
             }
-    out.print("</table>");
-    }else{
-        //out.print("No record found!");
+            out.print("</table>");
+        } else {
+            out.print("No record found!");
+        }
     }
 %>    
        
